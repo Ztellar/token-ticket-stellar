@@ -35,10 +35,10 @@ const Dashboard = () => {
       <main className="container mx-auto px-4 py-12">
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Mis <span className="gradient-cosmic bg-clip-text text-transparent">TokenTickets</span>
+            Mis <span className="gradient-cosmic bg-clip-text text-transparent">Tickets</span>
           </h1>
           <p className="text-muted-foreground text-lg">
-            Tus coleccionables digitales verificados en blockchain
+            Tus entradas digitales y beneficios exclusivos
           </p>
         </div>
         
@@ -67,13 +67,13 @@ const Dashboard = () => {
               <CardTitle className="text-lg">Valor de Colección</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-4xl font-bold text-primary">350 XLM</p>
+              <p className="text-4xl font-bold text-primary">$105.000</p>
             </CardContent>
           </Card>
         </div>
         
         {/* Owned Tickets */}
-        <h2 className="text-2xl font-bold mb-6">Tickets en Mi Wallet</h2>
+        <h2 className="text-2xl font-bold mb-6">Mis Tickets</h2>
         <div className="grid lg:grid-cols-2 gap-6 mb-12">
           {ownedTickets.map((ticket) => (
             <Card key={ticket.id} className="gradient-card border-primary/20 glow-primary">
@@ -104,7 +104,7 @@ const Dashboard = () => {
                   </div>
                   
                   <div>
-                    <p className="text-xs text-muted-foreground mb-2">Token ID:</p>
+                    <p className="text-xs text-muted-foreground mb-2">Código:</p>
                     <code className="text-xs bg-muted px-2 py-1 rounded">
                       {ticket.tokenId}
                     </code>
@@ -129,7 +129,7 @@ const Dashboard = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Gift className="h-5 w-5 text-primary" />
-                Airdrops Disponibles
+                Beneficios Disponibles
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">

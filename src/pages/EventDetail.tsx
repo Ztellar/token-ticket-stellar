@@ -11,7 +11,7 @@ const EventDetail = () => {
   
   const handlePurchase = () => {
     toast.success("¡Ticket comprado exitosamente!", {
-      description: "Tu TokenTicket ha sido emitido en la blockchain de Stellar",
+      description: "Tu entrada digital ha sido confirmada y enviada a tu cuenta",
     });
   };
   
@@ -62,27 +62,27 @@ const EventDetail = () => {
             
             <div className="gradient-card p-6 rounded-lg border border-primary/20">
               <div className="flex items-baseline gap-2 mb-2">
-                <span className="text-4xl font-bold text-primary">150</span>
-                <span className="text-xl text-muted-foreground">XLM</span>
+                <span className="text-4xl font-bold text-primary">$45.000</span>
+                <span className="text-xl text-muted-foreground">CLP</span>
               </div>
               <p className="text-sm text-muted-foreground mb-4">234 tickets disponibles</p>
               <Button onClick={handlePurchase} variant="hero" size="lg" className="w-full">
-                Comprar TokenTicket
+                Comprar Ticket
               </Button>
             </div>
             
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Beneficios de este TokenTicket</h3>
+              <h3 className="text-xl font-bold">Beneficios de esta Entrada</h3>
               
               <Card className="gradient-card border-primary/20">
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-base">
                     <Shield className="h-5 w-5 text-primary" />
-                    Verificación Blockchain
+                    Verificación Digital
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground">
-                  Token único e imposible de falsificar en la red Stellar
+                  Ticket único e imposible de falsificar con sistema de verificación segura
                 </CardContent>
               </Card>
               
@@ -102,7 +102,7 @@ const EventDetail = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-base">
                     <Sparkles className="h-5 w-5 text-primary" />
-                    Airdrops Exclusivos
+                    Sorteos Exclusivos
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground">
@@ -119,8 +119,8 @@ const EventDetail = () => {
           <p className="text-muted-foreground leading-relaxed">
             The Electric Waves regresan a la Arena CDMX con su esperado tour 2024. 
             Experimenta una noche inolvidable con sus mejores éxitos y nuevas canciones del álbum "Waves of Thunder". 
-            Este concierto marca un hito especial: todos los tickets son TokenTickets en blockchain, 
-            garantizando autenticidad y ofreciendo beneficios exclusivos a través de Stellar Network. 
+            Este concierto marca un hito especial: todos los tickets son entradas digitales verificadas, 
+            garantizando autenticidad y ofreciendo beneficios exclusivos. 
             Los poseedores de este ticket entrarán automáticamente en sorteos para meet & greets, 
             contenido detrás de cámaras y merchandising limitado.
           </p>

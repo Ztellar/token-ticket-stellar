@@ -13,7 +13,7 @@ export const Navigation = () => {
         <Link to="/" className="flex items-center gap-2">
           <Ticket className="h-8 w-8 text-primary" />
           <span className="text-2xl font-bold gradient-cosmic bg-clip-text text-transparent">
-            TokenTicket
+            TicketPass
           </span>
         </Link>
         
@@ -36,8 +36,8 @@ export const Navigation = () => {
           </Link>
           
           <Button variant="cosmic" size="sm" className="gap-2">
-            <Wallet className="h-4 w-4" />
-            Conectar Wallet
+            <User className="h-4 w-4" />
+            Iniciar Sesión
           </Button>
         </div>
       </div>

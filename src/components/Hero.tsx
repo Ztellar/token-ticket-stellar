@@ -29,8 +29,8 @@ export const Hero = () => {
           </h1>
           
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Tickets únicos en blockchain que eliminan el fraude, controlan la reventa
-            y convierten cada entrada en un coleccionable digital con beneficios exclusivos.
+            Tickets digitales únicos que eliminan el fraude, controlan la reventa
+            y convierten cada entrada en un recuerdo digital con beneficios exclusivos.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -53,7 +53,7 @@ export const Hero = () => {
               <Shield className="h-12 w-12 text-primary mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">Fraude Cero</h3>
               <p className="text-sm text-muted-foreground">
-                Cada ticket es un token único en Stellar, imposible de falsificar
+                Sistema de verificación digital único e imposible de falsificar
               </p>
             </div>
             
@@ -67,9 +67,9 @@ export const Hero = () => {
             
             <div className="gradient-card p-6 rounded-lg border border-primary/20 glow-primary">
               <Sparkles className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Coleccionables</h3>
+              <h3 className="text-lg font-semibold mb-2">Recuerdos Digitales</h3>
               <p className="text-sm text-muted-foreground">
-                Beneficios exclusivos, airdrops aleatorios y recuerdos digitales
+                Beneficios exclusivos, sorteos aleatorios y entradas coleccionables
               </p>
             </div>
           </div>

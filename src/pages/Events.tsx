@@ -85,7 +85,7 @@ const Events = () => {
             Descubre <span className="gradient-cosmic bg-clip-text text-transparent">Eventos</span>
           </h1>
           <p className="text-muted-foreground text-lg">
-            Tickets únicos verificados en blockchain. Cada entrada es un token NFT coleccionable.
+            Tickets digitales únicos y verificados. Cada entrada incluye beneficios exclusivos.
           </p>
         </div>
         

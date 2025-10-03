@@ -63,7 +63,7 @@ export const EventCard = ({
       <CardFooter className="flex items-center justify-between">
         <div>
           <p className="text-sm text-muted-foreground">Desde</p>
-          <p className="text-2xl font-bold text-primary">{price} XLM</p>
+          <p className="text-2xl font-bold text-primary">${price}.000</p>
         </div>
         <Button asChild variant="default">
           <Link to={`/event/${id}`}>Ver Detalles</Link>
