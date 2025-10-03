@@ -1,33 +1,13 @@
 import { Navigation } from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Calendar, MapPin, Gift, TrendingUp } from "lucide-react";
-import ticketCollectible from "@/assets/ticket-collectible.jpg";
-
-// Mock data for owned tickets
-const ownedTickets = [
-  {
-    id: "1",
-    event: "Rock en Concierto",
-    artist: "The Electric Waves",
-    date: "15 Dic 2024",
-    location: "Arena CDMX",
-    tokenId: "TKT-0001-STELLAR-XYZ",
-    benefits: ["Meet & Greet Elegible", "Airdrop Activo"],
-  },
-  {
-    id: "2",
-    event: "Noche de Jazz",
-    artist: "Blue Moon Ensemble",
-    date: "20 Dic 2024",
-    location: "Teatro Nacional",
-    tokenId: "TKT-0002-STELLAR-ABC",
-    benefits: ["Contenido Exclusivo"],
-  },
-];
+import { StellarWallet } from "@/components/StellarWallet";
+import { UserTickets } from "@/components/UserTickets";
+import { Gift, Wallet, Activity } from "lucide-react";
+import { useStellar } from "@/hooks/use-stellar";
 
 const Dashboard = () => {
+  const { account, balance } = useStellar();
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -35,138 +15,148 @@ const Dashboard = () => {
       <main className="container mx-auto px-4 py-12">
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Mis <span className="gradient-cosmic bg-clip-text text-transparent">Tickets</span>
+            Mi <span className="gradient-cosmic bg-clip-text text-transparent">Dashboard</span>
           </h1>
           <p className="text-muted-foreground text-lg">
-            Tus entradas digitales y beneficios exclusivos
+            Gestiona tu billetera Stellar y tus tickets digitales
           </p>
         </div>
         
         {/* Stats */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           <Card className="gradient-card border-primary/20">
-            <CardHeader>
-              <CardTitle className="text-lg">Total de Tickets</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-4xl font-bold text-primary">{ownedTickets.length}</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="gradient-card border-accent/20">
-            <CardHeader>
-              <CardTitle className="text-lg">Beneficios Activos</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-4xl font-bold text-accent">3</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="gradient-card border-primary/20">
-            <CardHeader>
-              <CardTitle className="text-lg">Valor de Colección</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-4xl font-bold text-primary">$105.000</p>
-            </CardContent>
-          </Card>
-        </div>
-        
-        {/* Owned Tickets */}
-        <h2 className="text-2xl font-bold mb-6">Mis Tickets</h2>
-        <div className="grid lg:grid-cols-2 gap-6 mb-12">
-          {ownedTickets.map((ticket) => (
-            <Card key={ticket.id} className="gradient-card border-primary/20 glow-primary">
-              <div className="flex gap-6 p-6">
-                <div className="w-32 h-32 rounded-lg overflow-hidden flex-shrink-0">
-                  <img
-                    src={ticketCollectible}
-                    alt="Token Collectible"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                
-                <div className="flex-1 space-y-3">
-                  <div>
-                    <h3 className="text-xl font-bold mb-1">{ticket.event}</h3>
-                    <p className="text-muted-foreground">{ticket.artist}</p>
-                  </div>
-                  
-                  <div className="space-y-1 text-sm">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-primary" />
-                      <span>{ticket.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-primary" />
-                      <span>{ticket.location}</span>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <p className="text-xs text-muted-foreground mb-2">Código:</p>
-                    <code className="text-xs bg-muted px-2 py-1 rounded">
-                      {ticket.tokenId}
-                    </code>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {ticket.benefits.map((benefit, index) => (
-                      <Badge key={index} className="bg-accent/20 text-accent border-accent/50">
-                        {benefit}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-        
-        {/* Benefits Section */}
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card className="gradient-card border-primary/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Gift className="h-5 w-5 text-primary" />
-                Beneficios Disponibles
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Wallet className="h-5 w-5 text-primary" />
+                Balance XLM
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-                <div>
-                  <p className="font-medium">Meet & Greet VIP</p>
-                  <p className="text-sm text-muted-foreground">The Electric Waves</p>
-                </div>
-                <Button size="sm" variant="default">Reclamar</Button>
+            <CardContent>
+              <div className="text-3xl font-bold text-primary">
+                {account ? parseFloat(balance.xlm).toFixed(2) : '0.00'}
               </div>
-              <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-                <div>
-                  <p className="font-medium">Merchandising Exclusivo</p>
-                  <p className="text-sm text-muted-foreground">Camiseta Edición Limitada</p>
-                </div>
-                <Button size="sm" variant="default">Reclamar</Button>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="gradient-card border-accent/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-accent" />
-                Valor de Reventa
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <p className="text-muted-foreground text-sm">
-                Vende tus tickets de forma segura con precio máximo controlado por el organizador.
-                Los artistas reciben comisión automática en cada reventa.
+              <p className="text-sm text-muted-foreground mt-1">
+                ≈ ${account ? (parseFloat(balance.xlm) * 1000).toFixed(0) : '0'} CLP
               </p>
-              <Button variant="cosmic" className="w-full">
-                Ver Mercado Secundario
-              </Button>
             </CardContent>
           </Card>
+          
+          <Card className="gradient-card border-accent/20">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Activity className="h-5 w-5 text-accent" />
+                Transacciones
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-accent">
+                {localStorage.getItem('completed-purchase') ? '1' : '0'}
+              </div>
+              <p className="text-sm text-muted-foreground mt-1">
+                En blockchain
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="gradient-card border-primary/20">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Gift className="h-5 w-5 text-primary" />
+                Tickets Activos
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-primary">
+                {localStorage.getItem('completed-purchase') ? '1' : '0'}
+              </div>
+              <p className="text-sm text-muted-foreground mt-1">
+                NFTs coleccionables
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+        
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Stellar Wallet Section */}
+          <div className="lg:col-span-1">
+            <h2 className="text-2xl font-bold mb-6">Billetera Stellar</h2>
+            <StellarWallet />
+
+            {account && (
+              <div className="mt-6">
+                <Card className="gradient-card border-primary/20">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg">Estado de la Red</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span>Conectado a Stellar Testnet</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span>Transacciones instantáneas</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                      <span>Comisiones mínimas</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+          </div>
+
+          {/* Tickets Section */}
+          <div className="lg:col-span-2">
+            <UserTickets />
+          </div>
+        </div>
+
+        {/* How it works section */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold mb-8 text-center">Cómo Funciona la Integración con Stellar</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="gradient-card border-primary/20 text-center">
+              <CardContent className="pt-6">
+                <div className="text-4xl mb-4">🔐</div>
+                <h3 className="font-bold mb-2">1. Billetera Segura</h3>
+                <p className="text-sm text-muted-foreground">
+                  Crea tu billetera Stellar con claves criptográficas únicas
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="gradient-card border-accent/20 text-center">
+              <CardContent className="pt-6">
+                <div className="text-4xl mb-4">💰</div>
+                <h3 className="font-bold mb-2">2. Financiación</h3>
+                <p className="text-sm text-muted-foreground">
+                  Obtén XLM para realizar transacciones en la red Stellar
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="gradient-card border-primary/20 text-center">
+              <CardContent className="pt-6">
+                <div className="text-4xl mb-4">🎫</div>
+                <h3 className="font-bold mb-2">3. Compra Verificada</h3>
+                <p className="text-sm text-muted-foreground">
+                  Paga en CLP con conversión automática a XLM
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="gradient-card border-accent/20 text-center">
+              <CardContent className="pt-6">
+                <div className="text-4xl mb-4">✅</div>
+                <h3 className="font-bold mb-2">4. Blockchain</h3>
+                <p className="text-sm text-muted-foreground">
+                  Ticket registrado permanentemente en la blockchain
+                </p>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </main>
     </div>

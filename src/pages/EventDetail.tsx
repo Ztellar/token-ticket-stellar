@@ -2,16 +2,21 @@ import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { StellarWallet } from "@/components/StellarWallet";
+import { StellarPurchase } from "@/components/StellarPurchase";
 import { Calendar, MapPin, Shield, Award, Sparkles, ChevronLeft } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "sonner";
+import { useState } from "react";
 
 const EventDetail = () => {
   const { id } = useParams();
-  
-  const handlePurchase = () => {
+  const [purchaseCompleted, setPurchaseCompleted] = useState(false);
+
+  const handlePurchaseSuccess = (transactionHash: string) => {
+    setPurchaseCompleted(true);
     toast.success("¡Ticket comprado exitosamente!", {
-      description: "Tu entrada digital ha sido confirmada y enviada a tu cuenta",
+      description: `Transacción registrada en blockchain: ${transactionHash.slice(0, 20)}...`,
     });
   };
   
@@ -27,9 +32,9 @@ const EventDetail = () => {
           </Link>
         </Button>
         
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-3 gap-8">
           {/* Image Section */}
-          <div className="space-y-4">
+          <div className="lg:col-span-2 space-y-4">
             <div className="relative h-[500px] rounded-lg overflow-hidden gradient-card border border-primary/20 glow-primary">
               <img
                 src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=1200&q=80"
@@ -42,7 +47,7 @@ const EventDetail = () => {
             </div>
           </div>
           
-          {/* Details Section */}
+          {/* Details and Purchase Section */}
           <div className="space-y-6">
             <div>
               <h1 className="text-4xl font-bold mb-2">Rock en Concierto</h1>
@@ -60,57 +65,77 @@ const EventDetail = () => {
               </div>
             </div>
             
-            <div className="gradient-card p-6 rounded-lg border border-primary/20">
-              <div className="flex items-baseline gap-2 mb-2">
-                <span className="text-4xl font-bold text-primary">$45.000</span>
-                <span className="text-xl text-muted-foreground">CLP</span>
-              </div>
-              <p className="text-sm text-muted-foreground mb-4">234 tickets disponibles</p>
-              <Button onClick={handlePurchase} variant="hero" size="lg" className="w-full">
-                Comprar Ticket
-              </Button>
-            </div>
-            
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold">Beneficios de esta Entrada</h3>
-              
-              <Card className="gradient-card border-primary/20">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-base">
-                    <Shield className="h-5 w-5 text-primary" />
-                    Verificación Digital
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  Ticket único e imposible de falsificar con sistema de verificación segura
+            {/* Stellar Wallet Component */}
+            <StellarWallet />
+
+            {/* Stellar Purchase Component */}
+            {!purchaseCompleted ? (
+              <StellarPurchase
+                eventId={id || "1"}
+                eventTitle="Rock en Concierto"
+                priceInCLP="45000"
+                onPurchaseSuccess={handlePurchaseSuccess}
+              />
+            ) : (
+              <Card className="gradient-card border-green-500/20 bg-green-50/10">
+                <CardContent className="pt-6">
+                  <div className="text-center space-y-2">
+                    <div className="text-2xl">🎫</div>
+                    <h3 className="font-bold text-green-600">¡Ticket Adquirido!</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Tu entrada ha sido registrada en la blockchain de Stellar
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
-              
-              <Card className="gradient-card border-accent/20">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-base">
-                    <Award className="h-5 w-5 text-accent" />
-                    Coleccionable Digital
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  Diseño artístico único que conservarás como recuerdo permanente
-                </CardContent>
-              </Card>
-              
-              <Card className="gradient-card border-primary/20">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-base">
-                    <Sparkles className="h-5 w-5 text-primary" />
-                    Sorteos Exclusivos
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  Posibilidad aleatoria de recibir pases VIP, merchandising o contenido exclusivo
-                </CardContent>
-              </Card>
+            )}
+
+            <div className="text-sm text-muted-foreground bg-muted/30 p-3 rounded-lg">
+              <strong>💡 Demo de Hackathon:</strong><br/>
+              • Usa Stellar Testnet para transacciones seguras<br/>
+              • Conversión simulada: 1000 CLP = 1 XLM<br/>
+              • Todas las transacciones son verificables en blockchain
             </div>
           </div>
+        </div>
+
+        {/* Benefits Section */}
+        <div className="mt-12 grid md:grid-cols-3 gap-6">
+          <Card className="gradient-card border-primary/20">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Shield className="h-5 w-5 text-primary" />
+                Verificación Blockchain
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              Ticket único e imposible de falsificar registrado en Stellar blockchain
+            </CardContent>
+          </Card>
+
+          <Card className="gradient-card border-accent/20">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Award className="h-5 w-5 text-accent" />
+                NFT Coleccionable
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              Diseño artístico único que conservarás como recuerdo permanente en blockchain
+            </CardContent>
+          </Card>
+
+          <Card className="gradient-card border-primary/20">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Sparkles className="h-5 w-5 text-primary" />
+                Smart Contracts
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              Beneficios automáticos y sorteos ejecutados por contratos inteligentes
+            </CardContent>
+          </Card>
         </div>
         
         {/* Event Description */}
@@ -119,9 +144,9 @@ const EventDetail = () => {
           <p className="text-muted-foreground leading-relaxed">
             The Electric Waves regresan a la Arena CDMX con su esperado tour 2024. 
             Experimenta una noche inolvidable con sus mejores éxitos y nuevas canciones del álbum "Waves of Thunder". 
-            Este concierto marca un hito especial: todos los tickets son entradas digitales verificadas, 
-            garantizando autenticidad y ofreciendo beneficios exclusivos. 
-            Los poseedores de este ticket entrarán automáticamente en sorteos para meet & greets, 
+            Este concierto marca un hito especial: todos los tickets son entradas digitales verificadas en blockchain,
+            garantizando autenticidad y ofreciendo beneficios exclusivos através de smart contracts en Stellar.
+            Los poseedores de este ticket entrarán automáticamente en sorteos para meet & greets,
             contenido detrás de cámaras y merchandising limitado.
           </p>
         </div>
