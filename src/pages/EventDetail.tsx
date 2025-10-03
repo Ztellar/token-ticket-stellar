@@ -117,11 +117,11 @@ const EventDetail = () => {
             <CardHeader className="pb-3">
               <CardTitle className="flex items-center gap-2 text-base">
                 <Award className="h-5 w-5 text-accent" />
-                NFT Coleccionable
+                Beneficio Exclusivo
               </CardTitle>
             </CardHeader>
             <CardContent className="text-sm text-muted-foreground">
-              Diseño artístico único que conservarás como recuerdo permanente en blockchain
+              Diseños artísticos únicos que conservarás como recuerdo permanente
             </CardContent>
           </Card>
 

@@ -12,8 +12,8 @@ export const Navigation = () => {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <Ticket className="h-8 w-8 text-primary" />
-          <span className="text-2xl font-bold gradient-cosmic bg-clip-text text-transparent">
-            TicketPass
+          <span className="text-2xl font-bold text-primary">
+            TokenTicket
           </span>
         </Link>
         

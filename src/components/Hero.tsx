@@ -23,7 +23,7 @@ export const Hero = () => {
         <div className="max-w-4xl mx-auto space-y-8">
           <h1 className="text-5xl md:text-7xl font-bold leading-tight">
             El Futuro de las
-            <span className="block gradient-cosmic bg-clip-text text-transparent">
+            <span className="block text-primary">
               Entradas de Conciertos
             </span>
           </h1>

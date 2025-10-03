@@ -78,17 +78,17 @@ const Events = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <main className="container mx-auto px-4 py-12">
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Descubre <span className="gradient-cosmic bg-clip-text text-transparent">Eventos</span>
+            Descubre <span className="bg-clip-text">Eventos</span>
           </h1>
           <p className="text-muted-foreground text-lg">
-            Tickets digitales únicos y verificados. Cada entrada incluye beneficios exclusivos.
+            Lista de conciertos y eventos disponibles.
           </p>
         </div>
-        
+
         {/* Search and Filters */}
         <div className="flex gap-4 mb-8">
           <div className="flex-1 relative">
@@ -103,7 +103,7 @@ const Events = () => {
             Filtros
           </Button>
         </div>
-        
+
         {/* Events Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {events.map((event) => (

@@ -24,48 +24,16 @@ export const UserTickets = () => {
   // Para el demo, simulamos algunos tickets
   useEffect(() => {
     if (account) {
-      // Simular tickets comprados (en una app real vendría de la blockchain)
-      const mockTickets: PurchasedTicket[] = [
-        {
-          id: '1',
-          eventTitle: 'Rock en Concierto',
-          eventDate: '15 Dic 2024',
-          venue: 'Arena CDMX',
-          priceInCLP: '45000',
-          transactionHash: 'ABC123...XYZ789',
-          purchaseDate: '10 Dic 2024',
-          status: 'active'
-        }
-      ];
-
-      // Solo mostrar si hay transacciones reales guardadas
-      const hasCompletedPurchase = localStorage.getItem('completed-purchase');
-      if (hasCompletedPurchase) {
-        setTickets(mockTickets);
+      // Obtener tickets comprados desde localStorage
+      const storedTickets = localStorage.getItem('purchased-tickets');
+      if (storedTickets) {
+        setTickets(JSON.parse(storedTickets));
       }
     }
   }, [account]);
 
   const handleViewTransaction = (hash: string) => {
     window.open(`https://stellar.expert/explorer/testnet/tx/${hash}`, '_blank');
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'active': return 'bg-green-100 text-green-800';
-      case 'used': return 'bg-gray-100 text-gray-800';
-      case 'expired': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'active': return 'Activo';
-      case 'used': return 'Usado';
-      case 'expired': return 'Expirado';
-      default: return 'Desconocido';
-    }
   };
 
   if (!account) {
@@ -123,8 +91,8 @@ export const UserTickets = () => {
                     </div>
                   </div>
                 </div>
-                <Badge className={getStatusColor(ticket.status)}>
-                  {getStatusText(ticket.status)}
+                <Badge className="bg-green-100 text-green-800">
+                  {ticket.status === 'active' ? 'Activo' : ticket.status === 'used' ? 'Usado' : 'Expirado'}
                 </Badge>
               </div>
             </CardHeader>
@@ -150,13 +118,6 @@ export const UserTickets = () => {
                   >
                     <ExternalLink className="h-3 w-3" />
                   </Button>
-                </div>
-              </div>
-
-              <div className="pt-3 border-t">
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  Verificado en Stellar Blockchain
                 </div>
               </div>
             </CardContent>

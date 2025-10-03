@@ -15,7 +15,7 @@ const Dashboard = () => {
       <main className="container mx-auto px-4 py-12">
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Mi <span className="gradient-cosmic bg-clip-text text-transparent">Dashboard</span>
+            Mi <span className="text-primary">Dashboard</span>
           </h1>
           <p className="text-muted-foreground text-lg">
             Gestiona tu billetera Stellar y tus tickets digitales
@@ -70,7 +70,7 @@ const Dashboard = () => {
                 {localStorage.getItem('completed-purchase') ? '1' : '0'}
               </div>
               <p className="text-sm text-muted-foreground mt-1">
-                NFTs coleccionables
+                Tickets digitales únicos
               </p>
             </CardContent>
           </Card>
