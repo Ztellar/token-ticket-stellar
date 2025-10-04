@@ -61,4 +61,54 @@ npm install
 
 # 4. Iniciar el servidor de desarrollo
 npm run dev
+```
+
+---
+
+## 🌐 Deploy en Vercel
+
+Este proyecto está listo para ser desplegado en **Vercel** con solo unos clics.
+
+### Opción 1: Deploy con un click
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Ztellar/token-ticket-stellar)
+
+### Opción 2: Deploy manual desde GitHub
+
+1. Ve a [vercel.com](https://vercel.com) y crea una cuenta o inicia sesión
+2. Haz clic en **"Add New Project"**
+3. Importa tu repositorio de GitHub
+4. Vercel detectará automáticamente que es un proyecto Vite
+5. Las configuraciones de build ya están establecidas en `vercel.json`:
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install`
+6. Haz clic en **"Deploy"**
+
+### Opción 3: Deploy desde la CLI de Vercel
+
+```bash
+# 1. Instalar Vercel CLI globalmente
+npm i -g vercel
+
+# 2. Desde el directorio del proyecto, ejecutar
+vercel
+
+# 3. Seguir las instrucciones en pantalla
+# 4. Para producción, ejecutar
+vercel --prod
+```
+
+### Variables de entorno (si es necesario)
+
+Si tu aplicación requiere variables de entorno, puedes configurarlas en:
+- **Vercel Dashboard** → Tu Proyecto → Settings → Environment Variables
+
+---
+
+## 📝 Notas sobre el deploy
+
+- El archivo `vercel.json` ya está configurado para manejar el enrutamiento SPA correctamente
+- Todas las rutas (`/`, `/events`, `/event/:id`, `/dashboard`) funcionarán correctamente en producción
+- El proyecto usa Stellar Testnet, asegúrate de actualizar a Mainnet en producción si es necesario
 
